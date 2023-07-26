@@ -5,6 +5,7 @@ from django.utils import timezone
 
 # Create your models here.
 class Post(models.Model):
+
     class Status(models.TextChoices):
         DRAFT = 'DF', 'Draft'
         PUBLISHED = 'PB', 'Published'
