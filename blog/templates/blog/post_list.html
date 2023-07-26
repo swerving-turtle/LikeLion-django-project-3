@@ -3,9 +3,15 @@
 {% block title %}post_list.html{% endblock title %}
 
 {% block content %}
+    <ul class="list-group">
     {% for post in posts %}
-        <h4>
-            <a href="{% url 'blog:post_detail' post.id %}">{{ post.title }}</a>
-        </h4>
+        <a href="{% url 'blog:post_detail' post.id %}" class="list-group-item">
+            <div class="d-flex w-100 justify-content-between">
+                <h5 class="mb-1">{{ post.title }}</h5>
+                <small>{{ post.published }}</small>
+            </div>
+        </a>
     {% endfor %}
+    </ul>
+
 {% endblock content %}
