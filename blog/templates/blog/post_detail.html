@@ -10,6 +10,8 @@
             <a href="{% url "blog:post_share" post.id %}" class="card-link">Share</a>
         </div>
     </div>
-
+    <div class="card">
+        {% include 'blog/includes/comment_form.html' %}
+    </div>
 
 {% endblock content %}
