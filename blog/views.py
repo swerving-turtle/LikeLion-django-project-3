@@ -17,7 +17,8 @@ class PostListView(ListView):
 def post_detail(request, post_id):
     post = get_object_or_404(Post, id=post_id)
     form = CommentForm()
-    return render(request, template_name='blog/post_detail.html', context={'post': post, 'form': form})
+    comments = post.comments.filter(active=True)
+    return render(request, template_name='blog/post_detail.html', context={'post': post, 'form': form, 'comments': comments})
 
 def post_share(request, post_id):
     post = get_object_or_404(Post, id=post_id)
@@ -41,10 +42,11 @@ def post_share(request, post_id):
 def post_comment(request, post_id):
     post = get_object_or_404(Post, id=post_id)
     form = CommentForm(request.POST)
+    comments = post.comments.filter(active=True)
     if form.is_valid():
         comment = form.save(commit=False)
         comment.post = post
         comment.save()
         return redirect(post)
 
-    return render(request, 'blog/post/detail.html', {'post': post, 'form': form})
+    return render(request, 'blog/post/detail.html', {'post': post, 'form': form, 'comments': comments})
